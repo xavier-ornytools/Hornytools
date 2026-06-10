@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HornyTools — DeFi. Optimized.</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --purple:#7B2FBE;
+    --purple-glow:#A855F7;
+    --gold:#C8A84B;
+    --bg:#0A0A0F;
+  }
+  body{
+    background:var(--bg);
+    color:#fff;
+    font-family:'Segoe UI',system-ui,sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* Ambient background */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(123,47,190,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(168,85,247,.10) 0%, transparent 70%);
+    pointer-events:none;z-index:0;
+  }
+
+  .page{position:relative;z-index:1}
+
+  /* Header */
+  header{
+    text-align:center;
+    padding:60px 24px 0;
+  }
+  .brand{
+    font-size:clamp(42px,8vw,88px);
+    font-weight:900;
+    letter-spacing:-2px;
+    background:linear-gradient(135deg,#fff 30%,var(--purple-glow) 70%,var(--gold) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow:none;
+    filter:drop-shadow(0 0 32px rgba(168,85,247,.5));
+  }
+  .sub{
+    font-size:clamp(14px,2vw,20px);
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-top:8px;
+    opacity:.85;
+  }
+
+  /* Main layout */
+  .main{
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap:clamp(16px,4vw,60px);
+    padding:40px 24px 0;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .img-assis{
+    width:clamp(240px,38vw,480px);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 0 80px rgba(123,47,190,.4), 0 40px 80px rgba(0,0,0,.6);
+    border:1px solid rgba(168,85,247,.2);
+    flex-shrink:0;
+  }
+  .img-debout{
+    width:clamp(200px,30vw,380px);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 0 60px rgba(123,47,190,.3), 0 40px 80px rgba(0,0,0,.6);
+    border:1px solid rgba(200,168,75,.15);
+    flex-shrink:0;
+  }
+  .img-assis img,.img-debout img{width:100%;height:auto;display:block}
+
+  /* Center text block */
+  .center-block{
+    text-align:center;
+    padding:32px 0 48px;
+    max-width:600px;
+    margin:0 auto;
+  }
+  .wip{
+    font-size:clamp(22px,3.5vw,38px);
+    font-weight:800;
+    color:#fff;
+    line-height:1.2;
+    letter-spacing:-0.5px;
+  }
+  .wip em{
+    font-style:normal;
+    color:var(--purple-glow);
+  }
+  .tagline{
+    margin-top:12px;
+    font-size:clamp(13px,1.6vw,18px);
+    color:rgba(255,255,255,.45);
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  /* CTA */
+  .cta-wrap{
+    margin-top:36px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  .cta-label{
+    font-size:13px;
+    color:rgba(255,255,255,.35);
+    letter-spacing:1px;
+    text-transform:uppercase;
+  }
+  .cta-link{
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,var(--purple),var(--purple-glow));
+    color:#fff;
+    text-decoration:none;
+    padding:12px 28px;
+    border-radius:40px;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.5px;
+    box-shadow:0 8px 32px rgba(123,47,190,.45);
+    transition:transform .15s,box-shadow .15s;
+  }
+  .cta-link:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 40px rgba(168,85,247,.6);
+  }
+  .cta-link svg{width:16px;height:16px;fill:currentColor}
+
+  /* Divider line */
+  .rule{
+    width:80px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--purple-glow),transparent);
+    margin:28px auto 0;
+  }
+
+  @media(max-width:700px){
+    .main{flex-direction:column;align-items:center}
+    .img-debout{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">HornyTools</div>
+    <div class="sub">DeFi. Optimized.</div>
+  </header>
+
+  <div class="main">
+    <div class="img-assis"><img src="horny-assis.png" alt="Alpha Farmer"/></div>
+    <div class="img-debout"><img src="horny-debout.png" alt="APY or Cry"/></div>
+  </div>
+
+  <div class="center-block">
+    <div class="rule"></div>
+    <p class="wip" style="margin-top:32px">Work in progress.<br><em>The best is coming.</em></p>
+    <p class="tagline">Advanced tools for serious DeFi players</p>
+    <div class="cta-wrap">
+      <span class="cta-label">In the meantime →</span>
+      <a class="cta-link" href="https://ornytools.xyz" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Try OrnyTools
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
