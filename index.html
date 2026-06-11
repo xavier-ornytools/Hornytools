@@ -3,180 +3,291 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>HornyTools — DeFi. Optimized.</title>
+<title>HornyTools — DeFi Tools For Horny Degens.</title>
+<meta name="description" content="Naughty DeFi tools for serious degens. Yield hunting, leverage, whale watching. Coming soon."/>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    --purple:#7B2FBE;
-    --purple-glow:#A855F7;
-    --gold:#C8A84B;
-    --bg:#0A0A0F;
+    --pink:#FF006E;
+    --pink-light:#ff3399;
+    --pink-glow:rgba(255,0,110,.35);
+    --bg:#060008;
   }
   body{
     background:var(--bg);
     color:#fff;
-    font-family:'Segoe UI',system-ui,sans-serif;
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
     min-height:100vh;
     overflow-x:hidden;
   }
 
-  /* Ambient background */
+  /* Ambient glows */
   body::before{
     content:'';
-    position:fixed;inset:0;
+    position:fixed;inset:0;pointer-events:none;z-index:0;
     background:
-      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(123,47,190,.18) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(168,85,247,.10) 0%, transparent 70%);
-    pointer-events:none;z-index:0;
+      radial-gradient(ellipse 55% 45% at 15% 60%, rgba(255,0,110,.12) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 85% 20%, rgba(255,51,153,.09) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 50% 100%, rgba(255,0,110,.08) 0%, transparent 55%);
   }
 
-  .page{position:relative;z-index:1}
+  .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;}
 
-  /* Header */
-  header{
-    text-align:center;
-    padding:60px 24px 0;
+  /* ── NAV ── */
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 48px;
   }
-  .brand{
-    font-size:clamp(42px,8vw,88px);
-    font-weight:900;
-    letter-spacing:-2px;
-    background:linear-gradient(135deg,#fff 30%,var(--purple-glow) 70%,var(--gold) 100%);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    text-shadow:none;
-    filter:drop-shadow(0 0 32px rgba(168,85,247,.5));
+  .nav-brand{
+    font-size:1.1rem;font-weight:900;letter-spacing:-.3px;
   }
-  .sub{
-    font-size:clamp(14px,2vw,20px);
-    letter-spacing:6px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-top:8px;
-    opacity:.85;
+  .nav-brand em{color:var(--pink);font-style:normal;}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{font-size:.85rem;color:rgba(255,255,255,.45);font-weight:500;text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-btn{
+    background:var(--pink);color:#fff;border:none;border-radius:8px;
+    font-size:.83rem;font-weight:800;padding:8px 20px;cursor:pointer;
+    box-shadow:0 4px 18px var(--pink-glow);letter-spacing:.3px;
+    transition:opacity .2s;
   }
+  .nav-btn:hover{opacity:.85;}
 
-  /* Main layout */
-  .main{
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    gap:clamp(16px,4vw,60px);
-    padding:40px 24px 0;
-    max-width:1100px;
-    margin:0 auto;
+  /* ── HERO ── */
+  .hero{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;
+    padding:60px 40px 40px;
   }
-  .img-assis{
-    width:clamp(240px,38vw,480px);
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:0 0 80px rgba(123,47,190,.4), 0 40px 80px rgba(0,0,0,.6);
-    border:1px solid rgba(168,85,247,.2);
-    flex-shrink:0;
-  }
-  .img-debout{
-    width:clamp(200px,30vw,380px);
-    border-radius:24px;
-    overflow:hidden;
-    box-shadow:0 0 60px rgba(123,47,190,.3), 0 40px 80px rgba(0,0,0,.6);
-    border:1px solid rgba(200,168,75,.15);
-    flex-shrink:0;
-  }
-  .img-assis img,.img-debout img{width:100%;height:auto;display:block}
-
-  /* Center text block */
-  .center-block{
-    text-align:center;
-    padding:32px 0 48px;
-    max-width:600px;
-    margin:0 auto;
-  }
-  .wip{
-    font-size:clamp(22px,3.5vw,38px);
-    font-weight:800;
-    color:#fff;
-    line-height:1.2;
-    letter-spacing:-0.5px;
-  }
-  .wip em{
-    font-style:normal;
-    color:var(--purple-glow);
-  }
-  .tagline{
-    margin-top:12px;
-    font-size:clamp(13px,1.6vw,18px);
-    color:rgba(255,255,255,.45);
-    letter-spacing:2px;
-    text-transform:uppercase;
-  }
-
-  /* CTA */
-  .cta-wrap{
-    margin-top:36px;
-    display:flex;align-items:center;justify-content:center;gap:12px;
-  }
-  .cta-label{
-    font-size:13px;
-    color:rgba(255,255,255,.35);
-    letter-spacing:1px;
-    text-transform:uppercase;
-  }
-  .cta-link{
+  .hero-kicker{
     display:inline-flex;align-items:center;gap:8px;
-    background:linear-gradient(135deg,var(--purple),var(--purple-glow));
-    color:#fff;
-    text-decoration:none;
-    padding:12px 28px;
-    border-radius:40px;
-    font-weight:700;
-    font-size:15px;
-    letter-spacing:.5px;
-    box-shadow:0 8px 32px rgba(123,47,190,.45);
-    transition:transform .15s,box-shadow .15s;
+    background:rgba(255,0,110,.1);border:1px solid rgba(255,0,110,.25);
+    border-radius:999px;padding:5px 16px;margin-bottom:32px;
+    font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+    color:var(--pink);
   }
-  .cta-link:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 40px rgba(168,85,247,.6);
+  .hero-h1{
+    font-size:clamp(3rem,9vw,8rem);
+    font-weight:900;line-height:.95;
+    letter-spacing:-4px;
+    text-transform:uppercase;
+    margin-bottom:32px;
   }
-  .cta-link svg{width:16px;height:16px;fill:currentColor}
+  .hero-h1 .w1{color:#fff;}
+  .hero-h1 .w2{
+    color:var(--pink);
+    text-shadow:0 0 60px var(--pink-glow), 0 0 120px rgba(255,0,110,.2);
+  }
+  .hero-h1 .w3{color:#fff;}
+  .hero-sub{
+    font-size:clamp(.95rem,1.8vw,1.2rem);
+    color:rgba(255,255,255,.45);
+    max-width:480px;line-height:1.75;margin-bottom:48px;
+  }
 
-  /* Divider line */
-  .rule{
-    width:80px;height:1px;
-    background:linear-gradient(90deg,transparent,var(--purple-glow),transparent);
-    margin:28px auto 0;
+  /* WIP badge */
+  .wip-badge{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid rgba(255,255,255,.1);border-radius:12px;
+    padding:14px 28px;margin-bottom:40px;
+    background:rgba(255,255,255,.03);
   }
+  .wip-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--pink);
+    box-shadow:0 0 8px var(--pink-glow);
+    animation:blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--pink-glow)}50%{opacity:.4;box-shadow:none}}
+  .wip-text{font-size:.83rem;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:1.5px;text-transform:uppercase;}
+  .wip-text strong{color:#fff;}
+
+  /* CTAs */
+  .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn-pink{
+    background:var(--pink);color:#fff;border:none;border-radius:10px;
+    font-size:.95rem;font-weight:800;padding:14px 32px;cursor:pointer;
+    box-shadow:0 6px 28px var(--pink-glow);letter-spacing:.3px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s,box-shadow .15s;text-decoration:none;
+  }
+  .btn-pink:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(255,0,110,.55);}
+  .btn-ghost{
+    background:transparent;color:rgba(255,255,255,.7);
+    border:1px solid rgba(255,255,255,.15);border-radius:10px;
+    font-size:.95rem;font-weight:700;padding:14px 28px;cursor:pointer;
+    transition:background .2s,border-color .2s;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.3);}
+
+  /* ── TOOLS TEASE ── */
+  .tools-section{
+    padding:60px 48px;
+    border-top:1px solid rgba(255,255,255,.05);
+  }
+  .tools-label{
+    text-align:center;font-size:.68rem;font-weight:800;
+    letter-spacing:3px;text-transform:uppercase;
+    color:rgba(255,255,255,.25);margin-bottom:28px;
+  }
+  .tools-grid{
+    max-width:900px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  .tool-card{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:14px;padding:20px 16px;text-align:center;
+    transition:background .2s,border-color .2s,transform .2s;
+    cursor:default;
+  }
+  .tool-card:hover{
+    background:rgba(255,0,110,.06);
+    border-color:rgba(255,0,110,.25);
+    transform:translateY(-3px);
+  }
+  .tool-ico{font-size:1.6rem;margin-bottom:10px;}
+  .tool-name{
+    font-size:.78rem;font-weight:800;color:#fff;
+    text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;
+  }
+  .tool-desc{font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.5;}
+  .tool-soon{
+    display:inline-block;margin-top:8px;
+    font-size:.58rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+    color:var(--pink);background:rgba(255,0,110,.1);
+    border-radius:999px;padding:2px 10px;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar{
+    border-top:1px solid rgba(255,255,255,.05);
+    padding:28px 48px;
+    display:flex;align-items:center;justify-content:center;gap:0;
+    flex-wrap:wrap;
+  }
+  .stat{
+    flex:1 1 130px;text-align:center;padding:0 24px;
+    border-right:1px solid rgba(255,255,255,.06);
+  }
+  .stat:last-child{border-right:none;}
+  .stat-n{
+    font-size:1.5rem;font-weight:900;
+    color:var(--pink);
+    text-shadow:0 0 24px var(--pink-glow);
+  }
+  .stat-l{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-top:3px;}
+
+  /* ── FOOTER ── */
+  footer{
+    padding:20px 48px;
+    border-top:1px solid rgba(255,255,255,.04);
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:12px;
+  }
+  .f-brand{font-size:.85rem;font-weight:800;color:rgba(255,255,255,.3);}
+  .f-brand em{color:var(--pink);font-style:normal;}
+  .f-link{font-size:.78rem;color:rgba(255,255,255,.25);text-decoration:none;}
+  .f-link:hover{color:var(--pink);}
+  .f-badges{display:flex;gap:16px;}
+  .fbadge{font-size:.65rem;font-weight:700;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:1.2px;}
+  .fbadge em{color:var(--pink);font-style:normal;}
 
   @media(max-width:700px){
-    .main{flex-direction:column;align-items:center}
-    .img-debout{display:none}
+    nav{padding:16px 20px;}
+    .nav-links{display:none;}
+    .hero{padding:40px 20px 30px;}
+    .hero-h1{letter-spacing:-2px;}
+    .tools-grid{grid-template-columns:1fr 1fr;}
+    .tools-section{padding:40px 20px;}
+    .stats-bar{padding:20px;}
+    footer{padding:16px 20px;}
+    .f-badges{display:none;}
   }
 </style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <header>
-    <div class="brand">HornyTools</div>
-    <div class="sub">DeFi. Optimized.</div>
-  </header>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">Horny<em>Tools</em></div>
+    <ul class="nav-links">
+      <li><a href="#">Tools</a></li>
+      <li><a href="#">Alpha</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <button class="nav-btn">Connect</button>
+  </nav>
 
-  <div class="main">
-    <div class="img-assis"><img src="horny-assis.png" alt="Alpha Farmer"/></div>
-    <div class="img-debout"><img src="horny-debout.png" alt="APY or Cry"/></div>
-  </div>
-
-  <div class="center-block">
-    <div class="rule"></div>
-    <p class="wip" style="margin-top:32px">Work in progress.<br><em>The best is coming.</em></p>
-    <p class="tagline">Advanced tools for serious DeFi players</p>
-    <div class="cta-wrap">
-      <span class="cta-label">In the meantime →</span>
-      <a class="cta-link" href="https://ornytools.xyz" target="_blank">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Try OrnyTools
-      </a>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-kicker">⚡ Coming Soon — In Progress</div>
+    <h1 class="hero-h1">
+      <span class="w1">DeFi Tools<br>For </span><span class="w2">Horny</span><br><span class="w3">Degens.</span>
+    </h1>
+    <p class="hero-sub">Naughty calculators and risk tools.<br>Get more yield — and maybe a little dopamine.</p>
+    <div class="wip-badge">
+      <div class="wip-dot"></div>
+      <div class="wip-text"><strong>Work in progress</strong> — The best is coming.</div>
+    </div>
+    <div class="ctas">
+      <a class="btn-pink" href="https://ornytools.xyz" target="_blank">🚀 Try OrnyTools</a>
+      <a class="btn-ghost" href="https://ornytools.xyz" target="_blank">Explore Tools →</a>
     </div>
   </div>
+
+  <!-- TOOLS TEASE -->
+  <div class="tools-section">
+    <div class="tools-label">Choose your vice</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-ico">💰</div>
+        <div class="tool-name">Yield Hunting</div>
+        <div class="tool-desc">Find the juiciest APYs across protocols</div>
+        <span class="tool-soon">Soon</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-ico">⚡</div>
+        <div class="tool-name">Leverage Playground</div>
+        <div class="tool-desc">Calculate risk before you get wrecked</div>
+        <span class="tool-soon">Soon</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-ico">🐳</div>
+        <div class="tool-name">Whale Watching</div>
+        <div class="tool-desc">Follow the smart money, front-run the degens</div>
+        <span class="tool-soon">Soon</span>
+      </div>
+      <div class="tool-card">
+        <div class="tool-ico">🏛️</div>
+        <div class="tool-name">RWA Explorer</div>
+        <div class="tool-desc">Tokenized assets for sophisticated tastes</div>
+        <span class="tool-soon">Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">$1.69B</div><div class="stat-l">TVL Tracked</div></div>
+    <div class="stat"><div class="stat-n">18.7%</div><div class="stat-l">Avg APY</div></div>
+    <div class="stat"><div class="stat-n">76%</div><div class="stat-l">Utilization</div></div>
+    <div class="stat"><div class="stat-n">12.4%</div><div class="stat-l">24h Change</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="f-brand">Horny<em>Tools</em></div>
+    <a class="f-link" href="https://ornytools.xyz">← Back to OrnyTools</a>
+    <div class="f-badges">
+      <span class="fbadge">Secure</span>
+      <span class="fbadge">Accurate</span>
+      <span class="fbadge">Fast</span>
+      <span class="fbadge"><em>Naughty</em></span>
+    </div>
+  </footer>
 
 </div>
 </body>
