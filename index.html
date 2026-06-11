@@ -26,21 +26,20 @@
     content:'';
     position:fixed;inset:0;pointer-events:none;z-index:0;
     background:
-      radial-gradient(ellipse 55% 45% at 15% 60%, rgba(255,0,110,.12) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 50% at 85% 20%, rgba(255,51,153,.09) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 30% at 50% 100%, rgba(255,0,110,.08) 0%, transparent 55%);
+      radial-gradient(ellipse 55% 45% at 15% 60%, rgba(255,0,110,.10) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 85% 20%, rgba(255,51,153,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 50% 100%, rgba(255,0,110,.06) 0%, transparent 55%);
   }
 
-  .wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;}
+  .wrap{position:relative;z-index:1;display:flex;flex-direction:column;}
 
   /* ── NAV ── */
   nav{
     display:flex;align-items:center;justify-content:space-between;
     padding:20px 48px;
+    position:relative;z-index:10;
   }
-  .nav-brand{
-    font-size:1.1rem;font-weight:900;letter-spacing:-.3px;
-  }
+  .nav-brand{font-size:1.1rem;font-weight:900;letter-spacing:-.3px;}
   .nav-brand em{color:var(--pink);font-style:normal;}
   .nav-links{display:flex;gap:28px;list-style:none;}
   .nav-links a{font-size:.85rem;color:rgba(255,255,255,.45);font-weight:500;text-decoration:none;transition:color .2s;}
@@ -53,11 +52,57 @@
   }
   .nav-btn:hover{opacity:.85;}
 
-  /* ── HERO ── */
+  /* ── HERO SHOWCASE (image 1) ── */
+  .hero-showcase{
+    position:relative;
+    width:100%;
+    max-width:1280px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  .hero-showcase-inner{
+    position:relative;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(255,0,110,.22);
+    box-shadow:
+      0 0 0 1px rgba(255,0,110,.08),
+      0 8px 40px rgba(0,0,0,.6),
+      0 0 80px rgba(255,0,110,.18),
+      0 0 200px rgba(255,0,110,.08);
+  }
+  .hero-showcase-inner img{
+    width:100%;
+    display:block;
+    aspect-ratio:1536/1024;
+    object-fit:cover;
+  }
+  /* gradient overlay: top fade from bg + bottom fade */
+  .hero-showcase-inner::before{
+    content:'';
+    position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:
+      linear-gradient(to bottom, var(--bg) 0%, transparent 12%),
+      linear-gradient(to top, var(--bg) 0%, transparent 8%);
+  }
+  /* pink scanline shimmer */
+  .hero-showcase-inner::after{
+    content:'';
+    position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(255,0,110,.018) 3px,
+      rgba(255,0,110,.018) 4px
+    );
+  }
+
+  /* ── HERO TEXT ── */
   .hero{
-    flex:1;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;text-align:center;
-    padding:60px 40px 40px;
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;
+    padding:48px 40px 40px;
   }
   .hero-kicker{
     display:inline-flex;align-items:center;gap:8px;
@@ -179,6 +224,59 @@
   }
   .stat-l{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-top:3px;}
 
+  /* ── VICES SHOWCASE (image 2) ── */
+  .vices-showcase{
+    padding:24px 32px 56px;
+    border-top:1px solid rgba(255,255,255,.05);
+  }
+  .vices-label{
+    text-align:center;
+    font-size:.68rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+    color:rgba(255,0,110,.5);margin-bottom:24px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  .vices-label::before,.vices-label::after{
+    content:'';flex:1;max-width:120px;
+    height:1px;background:linear-gradient(to right, transparent, rgba(255,0,110,.3), transparent);
+  }
+  .vices-showcase-inner{
+    position:relative;
+    max-width:1200px;margin:0 auto;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid rgba(255,0,110,.18);
+    box-shadow:
+      0 0 0 1px rgba(255,0,110,.06),
+      0 12px 60px rgba(0,0,0,.7),
+      0 0 100px rgba(255,0,110,.14),
+      0 0 260px rgba(100,0,200,.06);
+  }
+  .vices-showcase-inner img{
+    width:100%;display:block;
+    aspect-ratio:1536/512;
+    object-fit:cover;
+  }
+  /* edge glow overlay */
+  .vices-showcase-inner::before{
+    content:'';
+    position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:
+      linear-gradient(to right, rgba(6,0,8,.4) 0%, transparent 8%, transparent 92%, rgba(6,0,8,.4) 100%),
+      linear-gradient(to bottom, transparent 70%, rgba(6,0,8,.6) 100%);
+  }
+  /* same scanlines */
+  .vices-showcase-inner::after{
+    content:'';
+    position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(255,0,110,.015) 3px,
+      rgba(255,0,110,.015) 4px
+    );
+  }
+
   /* ── FOOTER ── */
   footer{
     padding:20px 48px;
@@ -194,10 +292,17 @@
   .fbadge{font-size:.65rem;font-weight:700;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:1.2px;}
   .fbadge em{color:var(--pink);font-style:normal;}
 
+  @media(max-width:900px){
+    .hero-showcase{padding:0 16px;}
+    .hero-showcase-inner{border-radius:16px;}
+    .vices-showcase{padding:20px 16px 40px;}
+    .vices-showcase-inner{border-radius:14px;}
+    .vices-showcase-inner img{aspect-ratio:auto;}
+  }
   @media(max-width:700px){
     nav{padding:16px 20px;}
     .nav-links{display:none;}
-    .hero{padding:40px 20px 30px;}
+    .hero{padding:32px 20px 28px;}
     .hero-h1{letter-spacing:-2px;}
     .tools-grid{grid-template-columns:1fr 1fr;}
     .tools-section{padding:40px 20px;}
@@ -221,7 +326,14 @@
     <button class="nav-btn">Connect</button>
   </nav>
 
-  <!-- HERO -->
+  <!-- ══ IMAGE 1 — HERO SHOWCASE ══ -->
+  <div class="hero-showcase">
+    <div class="hero-showcase-inner">
+      <img src="horny-hero.png" alt="HornyTools — Naughty DeFi Tools for Serious Degens" loading="eager"/>
+    </div>
+  </div>
+
+  <!-- HERO TEXT -->
   <div class="hero">
     <div class="hero-kicker">⚡ Coming Soon — In Progress</div>
     <h1 class="hero-h1">
@@ -275,6 +387,14 @@
     <div class="stat"><div class="stat-n">18.7%</div><div class="stat-l">Avg APY</div></div>
     <div class="stat"><div class="stat-n">76%</div><div class="stat-l">Utilization</div></div>
     <div class="stat"><div class="stat-n">12.4%</div><div class="stat-l">24h Change</div></div>
+  </div>
+
+  <!-- ══ IMAGE 2 — CHOOSE YOUR VICE SHOWCASE ══ -->
+  <div class="vices-showcase">
+    <div class="vices-label">♥ Choose Your Vice ♥</div>
+    <div class="vices-showcase-inner">
+      <img src="horny-vices.png" alt="Choose Your Vice — HornyTools coming soon" loading="lazy"/>
+    </div>
   </div>
 
   <!-- FOOTER -->
